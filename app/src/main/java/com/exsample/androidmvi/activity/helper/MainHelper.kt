@@ -1,4 +1,4 @@
-package com.exsample.androidmvi.helper
+package com.exsample.androidmvi.activity.helper
 
 import com.exsample.androidmvi.model.Post
 import java.util.*

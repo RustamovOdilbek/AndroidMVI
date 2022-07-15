@@ -31,6 +31,9 @@ android {
             freeCompilerArgs +=["-Xjvm-default=all",]
         }
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {

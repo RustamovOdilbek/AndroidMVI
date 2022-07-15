@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.exsample.androidmvi">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidMVI">
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.UpdateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.CreateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SecondActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

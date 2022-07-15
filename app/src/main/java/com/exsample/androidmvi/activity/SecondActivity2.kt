@@ -1,4 +1,4 @@
-package com.exsample.androidmvi
+package com.exsample.androidmvi.activity
 
 import android.os.Bundle
 import android.util.Log
@@ -7,23 +7,21 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.exsample.androidmvi.helper.MainHelperIml
-import com.exsample.androidmvi.intentstate.MainIntenet
-import com.exsample.androidmvi.intentstate.MainState
+import com.exsample.androidmvi.R
+import com.exsample.androidmvi.activity.helper.UpdateHelperImpl
+import com.exsample.androidmvi.model.Post
 import com.exsample.androidmvi.network.RetrofitHttp
-import com.exsample.androidmvi.viewmodel.MainViewModel
-import com.exsample.androidmvi.viewmodel.MainViewModelFactory
 import kotlinx.coroutines.launch
 
-
-class MainActivity : AppCompatActivity() {
-    private lateinit var viewModel: MainViewModel
+class SecondActivity2 : AppCompatActivity() {
+    private lateinit var viewModel: SecondViewModel
     lateinit var recyclerView: RecyclerView
     private val TAG = "MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main2)
+
 
         initViews()
         obcerveViewModel()
@@ -33,19 +31,20 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch{
             viewModel.state.collect{
                 when(it){
-                    is MainState.Init -> {
+                    is SecondState.Init -> {
                         Log.d(TAG, "obcerveViewModel: Init")
                     }
-                    is MainState.Loading -> {
+                    is SecondState.Loading -> {
                         Log.d(TAG, "obcerveViewModel: Loading")
                     }
-                    is MainState.AllPosts -> {
+                    is SecondState.AllPosts -> {
                         Log.d(TAG, "obcerveViewModel: allposts ${it.posts.size}")
+                        refreshAdapter(it.posts)
                     }
-                    is MainState.DletePost -> {
+                    is SecondState.DletePost -> {
                         Log.d(TAG, "obcerveViewModel: delete ${it.post}")
                     }
-                    is MainState.Error -> {
+                    is SecondState.Error -> {
                         Log.d(TAG, "obcerveViewModel: Error ${it.error}")
                     }
                 }
@@ -54,9 +53,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        val factory = MainViewModelFactory(MainHelperIml(RetrofitHttp.postService))
+        val factory = SecondViewModelFactory(UpdateHelperImpl(RetrofitHttp.postService))
 
-        viewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory).get(SecondViewModel::class.java)
 
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = GridLayoutManager(this, 1)
@@ -65,15 +64,27 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+
     private fun intenetAllPosts(){
         lifecycleScope.launch{
-            viewModel.mainIntent.send(MainIntenet.AllPosts)
+            viewModel.secondIntenet.send(SecondIntenet.AllPosts)
         }
     }
 
-    private fun intenetDeletePost(){
-        lifecycleScope.launch{
-            viewModel.mainIntent.send(MainIntenet.DeletePost)
+    fun intenetDeletePost(id: Int){
+        lifecycleScope.launch {
+            viewModel.postId = id
+            lifecycleScope.launch {
+                viewModel.secondIntenet.send(SecondIntenet.DeletePost)
+            }
         }
     }
+
+
+    private fun refreshAdapter(posters: ArrayList<Post>) {
+        val adapter = PostAdapter2(this, posters)
+        recyclerView.adapter = adapter
+    }
+
 }

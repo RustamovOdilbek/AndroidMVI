@@ -1,8 +1,7 @@
-package com.exsample.androidmvi.helper
+package com.exsample.androidmvi.activity.helper
 
 import com.exsample.androidmvi.model.Post
 import com.exsample.androidmvi.network.service.PostService
-import retrofit2.Call
 import java.util.*
 
 class MainHelperIml(private val postService: PostService): MainHelper {

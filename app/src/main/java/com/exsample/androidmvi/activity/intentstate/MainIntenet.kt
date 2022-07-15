@@ -1,4 +1,4 @@
-package com.exsample.androidmvi.intentstate
+package com.exsample.androidmvi.activity.intentstate
 
 sealed class MainIntenet {
     object AllPosts: MainIntenet()

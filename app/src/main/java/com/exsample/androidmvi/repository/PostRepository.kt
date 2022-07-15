@@ -1,6 +1,6 @@
 package com.exsample.androidmvi.repository
 
-import com.exsample.androidmvi.helper.MainHelper
+import com.exsample.androidmvi.activity.helper.MainHelper
 
 class PostRepository(private val mainHelper: MainHelper) {
 

@@ -1,3 +1,11 @@
 package com.exsample.androidmvi.model
 
-data class Post(var id: Int, var userId: Int, var title: String, var body: String)
+import retrofit2.http.Body
+import java.io.Serializable
+
+data class Post(
+    val id: Int? = null,
+    val userId: Int? = null,
+    val title: String? = null,
+    val body: String? = null
+): Serializable

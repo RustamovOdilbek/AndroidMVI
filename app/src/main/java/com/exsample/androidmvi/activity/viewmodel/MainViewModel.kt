@@ -1,9 +1,9 @@
-package com.exsample.androidmvi.viewmodel
+package com.exsample.androidmvi.activity.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.exsample.androidmvi.intentstate.MainIntenet
-import com.exsample.androidmvi.intentstate.MainState
+import com.exsample.androidmvi.activity.intentstate.MainIntenet
+import com.exsample.androidmvi.activity.intentstate.MainState
 import com.exsample.androidmvi.repository.PostRepository
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow

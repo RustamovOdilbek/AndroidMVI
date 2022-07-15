@@ -1,8 +1,8 @@
-package com.exsample.androidmvi.viewmodel
+package com.exsample.androidmvi.activity.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.exsample.androidmvi.helper.MainHelper
+import com.exsample.androidmvi.activity.helper.MainHelper
 import com.exsample.androidmvi.repository.PostRepository
 
 class MainViewModelFactory(private val mainHelper: MainHelper): ViewModelProvider.Factory {

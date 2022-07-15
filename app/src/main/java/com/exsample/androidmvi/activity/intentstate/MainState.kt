@@ -1,4 +1,4 @@
-package com.exsample.androidmvi.intentstate
+package com.exsample.androidmvi.activity.intentstate
 
 import com.exsample.androidmvi.model.Post
 import java.util.*
